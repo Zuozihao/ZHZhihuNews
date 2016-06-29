@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  ZHZhihuNews
+//  ZhiHuNews
 //
-//  Created by 左梓豪 on 16/6/29.
+//  Created by 左梓豪 on 16/4/22.
 //  Copyright © 2016年 左梓豪. All rights reserved.
 //
 

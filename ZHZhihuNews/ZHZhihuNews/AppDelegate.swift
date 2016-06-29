@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  ZHZhihuNews
+//  ZhiHuNews
 //
-//  Created by 左梓豪 on 16/6/29.
+//  Created by 左梓豪 on 16/4/22.
 //  Copyright © 2016年 左梓豪. All rights reserved.
 //
 
@@ -12,9 +12,28 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var drawerController:DrawerController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        let leftVC = LeftViewController()
+        let centerVC = CenterViewController()
+        
+        let navigationVC = UINavigationController.init(rootViewController: centerVC)
+        
+        self.drawerController = DrawerController.init(centerViewController: navigationVC, leftDrawerViewController:leftVC)
+        self.drawerController?.showsShadows = false
+        self.drawerController!.openDrawerGestureModeMask = .All
+        self.drawerController!.closeDrawerGestureModeMask = .All
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let tintColor = UIColor(red: 29 / 255, green: 173 / 255, blue: 234 / 255, alpha: 1.0)
+        self.window?.tintColor = tintColor
+        
+        self.window?.rootViewController = self.drawerController
+        
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+
+        
         // Override point for customization after application launch.
         return true
     }

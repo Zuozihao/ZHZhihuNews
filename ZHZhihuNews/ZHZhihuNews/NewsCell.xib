@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="71" id="KGk-i7-Jjw" customClass="NewsCell" customModule="ZhiHuNews" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="70.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一个好好看的美食节目,带你看怎么做好法式马卡龙,一起来看看阿姆的风采吧,天天读书不休息" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMo-Ti-oL7">
+                        <rect key="frame" x="16" y="8" width="266" height="54.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recovery.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="q5n-qc-D0X">
+                        <rect key="frame" x="287" y="8" width="80" height="64"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="Ln8-KU-hLi"/>
+                            <constraint firstAttribute="height" constant="64" id="tOH-Xp-Oap"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="q5n-qc-D0X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="8En-Og-CZC"/>
+                    <constraint firstItem="jMo-Ti-oL7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="bXq-6N-Myb"/>
+                    <constraint firstItem="jMo-Ti-oL7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="iON-pE-K5l"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="jMo-Ti-oL7" secondAttribute="trailing" constant="85" id="ssB-5U-36h"/>
+                    <constraint firstItem="q5n-qc-D0X" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="tT6-YE-hyQ"/>
+                    <constraint firstItem="jMo-Ti-oL7" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="uPA-i2-uyK"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imgView" destination="q5n-qc-D0X" id="Oi0-tH-p0L"/>
+                <outlet property="titleLabel" destination="jMo-Ti-oL7" id="qcH-3p-oAV"/>
+            </connections>
+            <point key="canvasLocation" x="437.5" y="328.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="recovery.jpg" width="300" height="300"/>
+    </resources>
+</document>

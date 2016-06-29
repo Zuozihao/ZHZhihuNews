@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="ZhiHuNews" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_Background.png" translatesAutoresizingMaskIntoConstraints="NO" id="sPB-rA-zoS">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Fh7-Xa-9S4">
+                    <rect key="frame" x="0.0" y="117" width="375" height="45"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用微博登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NH-nq-eVs">
+                    <rect key="frame" x="0.0" y="318" width="375" height="32"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="知乎日报不会未经同意通过你的微博账号发布任何信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pyq-oq-n6H">
+                    <rect key="frame" x="0.0" y="628" width="375" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="oD1-zO-gFU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="0.44645099787586084" green="0.73927186774528919" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvh-AC-qdr">
+                    <rect key="frame" x="21" y="380" width="332" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="y6d-jq-CZJ"/>
+                    </constraints>
+                    <state key="normal" title="新浪微博" backgroundImage="Login_Button_Sina.png">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3g-0g-m1v">
+                    <rect key="frame" x="21" y="455" width="332" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="op9-YJ-aBE"/>
+                    </constraints>
+                    <state key="normal" title="腾讯微博" backgroundImage="Login_Button_Tencent.png">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Pyq-oq-n6H" secondAttribute="bottom" constant="18" id="2Ma-3v-oB4"/>
+                <constraint firstAttribute="trailing" secondItem="Pyq-oq-n6H" secondAttribute="trailing" id="44U-av-Icb"/>
+                <constraint firstItem="Fh7-Xa-9S4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="117" id="7AK-92-Up0"/>
+                <constraint firstItem="sPB-rA-zoS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8LZ-9X-UOt"/>
+                <constraint firstAttribute="bottom" secondItem="sPB-rA-zoS" secondAttribute="bottom" id="B17-a8-E7N"/>
+                <constraint firstAttribute="trailing" secondItem="fvh-AC-qdr" secondAttribute="trailing" constant="22" id="GEP-LJ-NJa"/>
+                <constraint firstItem="Pyq-oq-n6H" firstAttribute="top" secondItem="fvh-AC-qdr" secondAttribute="bottom" constant="197" id="NWc-zx-si4"/>
+                <constraint firstItem="W3g-0g-m1v" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="21" id="d37-wX-Hqz"/>
+                <constraint firstItem="Pyq-oq-n6H" firstAttribute="top" secondItem="W3g-0g-m1v" secondAttribute="bottom" constant="122" id="iMp-EH-uHh"/>
+                <constraint firstAttribute="trailing" secondItem="sPB-rA-zoS" secondAttribute="trailing" id="oDF-dB-9Y2"/>
+                <constraint firstItem="fvh-AC-qdr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="21" id="pO6-JL-zem"/>
+                <constraint firstAttribute="trailing" secondItem="W3g-0g-m1v" secondAttribute="trailing" constant="22" id="rTP-5f-BxZ"/>
+                <constraint firstItem="Fh7-Xa-9S4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xVi-UA-ruy"/>
+                <constraint firstItem="sPB-rA-zoS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="y1T-nc-mOg"/>
+                <constraint firstAttribute="trailing" secondItem="Fh7-Xa-9S4" secondAttribute="trailing" id="ymD-FF-Hig"/>
+                <constraint firstItem="Pyq-oq-n6H" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zpt-Na-u2e"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="349.5" y="302.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Login_Background.png" width="320" height="506"/>
+        <image name="Login_Button_Sina.png" width="260" height="51"/>
+        <image name="Login_Button_Tencent.png" width="260" height="51"/>
+        <image name="Login_Logo.png" width="125" height="45"/>
+    </resources>
+</document>
