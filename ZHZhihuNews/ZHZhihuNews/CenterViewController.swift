@@ -48,7 +48,7 @@ class CenterViewController: UIViewController,UITableViewDataSource,UITableViewDe
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: navButton)
         
         let rect : CGRect = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height + 64)
-        self.tableView = UITableView.init(frame: rect, style: .Plain)
+        self.tableView = UITableView.init(frame: rect, style: .Grouped)
         tableView.dataSource = self
         tableView.delegate = self
         self.view.addSubview(tableView)
@@ -162,6 +162,10 @@ class CenterViewController: UIViewController,UITableViewDataSource,UITableViewDe
         return 80
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3;
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = NewsDetailViewController()
         vc.id = self.dataArray[indexPath.row].id
@@ -169,6 +173,33 @@ class CenterViewController: UIViewController,UITableViewDataSource,UITableViewDe
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if section != 0 {
+            let head : UILabel = UILabel.init(frame: CGRectMake(0, 0, self.view.frame.size.width, 25))
+            head.backgroundColor = UIColor.init(red: 64/255.0, green: 175/255.0, blue: 255/255.0, alpha: 1)
+            head.text = "07月5日 星期二"
+            head.textColor = UIColor.whiteColor()
+            head.textAlignment = .Center
+            return head;
+        }
+        
+        let head : UILabel = UILabel.init(frame: CGRectZero)
+        return head
+    }
+    
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0.1
+        }
+        
+        return  40;
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         

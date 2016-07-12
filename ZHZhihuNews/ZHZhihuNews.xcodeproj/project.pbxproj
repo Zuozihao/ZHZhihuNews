@@ -487,6 +487,11 @@
 		9812A5051D2379D200196159 /* recovery.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9812A3331D2379D200196159 /* recovery.jpg */; };
 		9812A5061D237A9800196159 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9812A1471D23797700196159 /* Alamofire.framework */; };
 		9812A5071D237A9800196159 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9812A1471D23797700196159 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9841545E1D338BF400B7E3A3 /* js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9841545D1D338BF400B7E3A3 /* js.txt */; };
+		984154601D3396E700B7E3A3 /* nopic.js in Resources */ = {isa = PBXBuildFile; fileRef = 9841545F1D3396E700B7E3A3 /* nopic.js */; };
+		984154621D339C0500B7E3A3 /* test.js in Resources */ = {isa = PBXBuildFile; fileRef = 984154611D339C0500B7E3A3 /* test.js */; };
+		984154641D348B2300B7E3A3 /* getImages.txt in Resources */ = {isa = PBXBuildFile; fileRef = 984154631D348B2300B7E3A3 /* getImages.txt */; };
+		984154661D348B7A00B7E3A3 /* function.txt in Resources */ = {isa = PBXBuildFile; fileRef = 984154651D348B7A00B7E3A3 /* function.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1063,6 +1068,11 @@
 		9812A3311D2379D200196159 /* ZHAnswerViewPrevIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZHAnswerViewPrevIcon@2x.png"; sourceTree = "<group>"; };
 		9812A3321D2379D200196159 /* ZHAnswerViewPrevIcon_Bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZHAnswerViewPrevIcon_Bottom@2x.png"; sourceTree = "<group>"; };
 		9812A3331D2379D200196159 /* recovery.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = recovery.jpg; path = ../recovery.jpg; sourceTree = "<group>"; };
+		9841545D1D338BF400B7E3A3 /* js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = js.txt; sourceTree = "<group>"; };
+		9841545F1D3396E700B7E3A3 /* nopic.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = nopic.js; sourceTree = "<group>"; };
+		984154611D339C0500B7E3A3 /* test.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
+		984154631D348B2300B7E3A3 /* getImages.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getImages.txt; sourceTree = "<group>"; };
+		984154651D348B7A00B7E3A3 /* function.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = function.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1115,6 +1125,7 @@
 		9812A10D1D2378BE00196159 /* ZHZhihuNews */ = {
 			isa = PBXGroup;
 			children = (
+				984154611D339C0500B7E3A3 /* test.js */,
 				9812A10E1D2378BE00196159 /* AppDelegate.swift */,
 				9812A5111D237DA300196159 /* Resource */,
 				9812A5101D237D8400196159 /* Left */,
@@ -1690,7 +1701,11 @@
 		9812A5111D237DA300196159 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				984154651D348B7A00B7E3A3 /* function.txt */,
 				9812A1151D2378BE00196159 /* Assets.xcassets */,
+				984154631D348B2300B7E3A3 /* getImages.txt */,
+				9841545F1D3396E700B7E3A3 /* nopic.js */,
+				9841545D1D338BF400B7E3A3 /* js.txt */,
 				9812A1611D2379D100196159 /* 4.txt */,
 				9812A1631D2379D100196159 /* head1.jpeg */,
 				9812A1641D2379D100196159 /* head2.jpg */,
@@ -1977,6 +1992,7 @@
 				9812A39C1D2379D200196159 /* compose#.png in Resources */,
 				9812A4FF1D2379D200196159 /* Top_Mask@2x.png in Resources */,
 				9812A33A1D2379D200196159 /* head5.jpg in Resources */,
+				984154661D348B7A00B7E3A3 /* function.txt in Resources */,
 				9812A34F1D2379D200196159 /* Action_Login_Bg@2x.png in Resources */,
 				9812A4841D2379D200196159 /* Menu_Day@2x.png in Resources */,
 				9812A4391D2379D200196159 /* Default.png in Resources */,
@@ -2055,6 +2071,7 @@
 				9812A4CA1D2379D200196159 /* News_Theme_Dividingline@2x.png in Resources */,
 				9812A4421D2379D200196159 /* Field_Back@2x.png in Resources */,
 				9812A4991D2379D200196159 /* netError.png in Resources */,
+				9841545E1D338BF400B7E3A3 /* js.txt in Resources */,
 				9812A4B01D2379D200196159 /* News_Navigation_Arrow_Highlight@3x.png in Resources */,
 				9812A39B1D2379D200196159 /* comopose#@2x.png in Resources */,
 				9812A4C41D2379D200196159 /* News_Number_Bg@2x.png in Resources */,
@@ -2095,6 +2112,7 @@
 				9812A49E1D2379D200196159 /* News_Bottom_Arrow@2x.png in Resources */,
 				9812A4A21D2379D200196159 /* News_Comment_Highlight@2x.png in Resources */,
 				9812A4DE1D2379D200196159 /* Settings_Bg@2x.png in Resources */,
+				984154601D3396E700B7E3A3 /* nopic.js in Resources */,
 				9812A4521D2379D200196159 /* Guide_Pic1@2x.png in Resources */,
 				9812A4781D2379D200196159 /* Login_Button_Tencent_Highlight@2x.png in Resources */,
 				9812A42B1D2379D200196159 /* Dark_Setting_Bg3_Bottom@2x.png in Resources */,
@@ -2107,6 +2125,7 @@
 				9812A4501D2379D200196159 /* Guide_Button@2x.png in Resources */,
 				9812A3FA1D2379D200196159 /* Dark_Menu_Avatar_Mask@2x.png in Resources */,
 				9812A4081D2379D200196159 /* Dark_Message_Reply@2x.png in Resources */,
+				984154641D348B2300B7E3A3 /* getImages.txt in Resources */,
 				9812A45C1D2379D200196159 /* Haircut@2x.png in Resources */,
 				9812A4E81D2379D200196159 /* Share_QQ@2x.png in Resources */,
 				9812A40E1D2379D200196159 /* Dark_News_Avatar@2x.png in Resources */,
@@ -2183,6 +2202,7 @@
 				9812A4B91D2379D200196159 /* News_Navigation_Next_Highlight@3x.png in Resources */,
 				9812A3C41D2379D200196159 /* composevideo_pic.png in Resources */,
 				9812A4251D2379D200196159 /* Dark_Profile_SignOut_Highlight@2x.png in Resources */,
+				984154621D339C0500B7E3A3 /* test.js in Resources */,
 				9812A3AA1D2379D200196159 /* composedingweihover.png in Resources */,
 				9812A40C1D2379D200196159 /* Dark_News_Arrow@2x.png in Resources */,
 				9812A4961D2379D200196159 /* Message_Vote@2x.png in Resources */,
@@ -2603,6 +2623,7 @@
 				9812A1351D2378BE00196159 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9812A1361D2378BE00196159 /* Build configuration list for PBXNativeTarget "ZHZhihuNewsTests" */ = {
 			isa = XCConfigurationList;
@@ -2611,6 +2632,7 @@
 				9812A1381D2378BE00196159 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9812A1391D2378BE00196159 /* Build configuration list for PBXNativeTarget "ZHZhihuNewsUITests" */ = {
 			isa = XCConfigurationList;
@@ -2619,6 +2641,7 @@
 				9812A13B1D2378BE00196159 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

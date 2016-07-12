@@ -1,0 +1,8 @@
+function getImages(){
+    var objs = document.getElementsByTagName("img");
+    var imgScr = '';
+    for(var i=0;i<objs.length;i++){
+    imgScr = imgScr + objs[i].src + '+';
+    };
+    return imgScr;
+    };

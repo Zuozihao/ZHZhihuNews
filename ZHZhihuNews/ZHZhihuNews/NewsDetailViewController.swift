@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JavaScriptCore
 
 class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
 
@@ -21,6 +22,9 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
     var webViewHeight:CGFloat = 0.0
     var data:NSData!
     var webScrollView:UIScrollView!
+    var imageView:UIImageView!
+    var maskView:UIView!
+    var dismissImageView:UITapGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +80,6 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
         self.webScrollView.delegate = self
         self.webScrollView.tag = 2
         scrollView.addSubview(webView)
-        
     }
     
     func requestData() {
@@ -161,16 +164,6 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
         }
         
 }
-    
-    func webViewDidFinishLoad(webView: UIWebView) {
-        self.webView.setNeedsLayout()
-        self.webView.layoutIfNeeded()
-    }
-    
-//    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-//        return true
-//    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.hidden = true
@@ -180,6 +173,16 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func dimissImageViewAction() {
+        UIView.animateWithDuration(0.5) {
+            self.maskView.alpha = 0
+            self.imageView.alpha = 0
+            self.maskView.hidden = true
+            self.imageView.hidden = true
+        }
+    }
+
     
 
     /*
@@ -195,8 +198,106 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
 }
 
 extension NewsDetailViewController:UIWebViewDelegate {
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool{
-      print(request.URL?.absoluteString)
-       return true
+    func webViewDidFinishLoad(webView: UIWebView) {
+        let jsGetImages:String = try!String.init(contentsOfFile: NSBundle.mainBundle().pathForResource("getImages", ofType: "txt")!)
+        self.webView.stringByEvaluatingJavaScriptFromString(jsGetImages)
+        let urlResult : String = webView.stringByEvaluatingJavaScriptFromString("getImages()")!
+        print(urlResult)
+        
+        let clickAction : String = try!String.init(contentsOfFile: NSBundle.mainBundle().pathForResource("function", ofType: "txt")!)
+        self.webView.stringByEvaluatingJavaScriptFromString(clickAction)
+        self.webView.stringByEvaluatingJavaScriptFromString("registerImageClickAction();")
+    }
+    
+    func webViewDidStartLoad(webView: UIWebView) {
+        if !webView.loading  {
+            let jsContext = self.webView.valueForKeyPath("documentView.webView.mainFrame.javaScriptContext")
+            jsContext?.setObject(JavaScriptMethod(), forKeyedSubscript: "callSwift")
+        }
+    }
+    
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        let scheme : String = (request.URL?.scheme)!
+        
+        if scheme == "image-preview" {
+            let len:Int = "image-preview:".length
+            let absoluteString :NSString = (request.URL?.absoluteString)! as NSString
+            var path:String = absoluteString.substringFromIndex(len)
+            path = path.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!//点击截取到的图片地址
+            
+            let window:UIWindow = ((UIApplication.sharedApplication().delegate?.window)!)!
+            if self.maskView == nil {
+                self.maskView = UIView.init(frame: window.frame)
+                maskView.backgroundColor = UIColor.init(white: 0, alpha: 0.3)
+                window .addSubview(maskView)
+            }
+            
+            if self.imageView == nil {
+                self.imageView = UIImageView.init(frame: CGRectMake(0, 0, window.frame.size.width, window.frame.size.height))
+                self.imageView.contentMode = .ScaleAspectFit
+                imageView.userInteractionEnabled = true
+                maskView.insertSubview(imageView, aboveSubview: maskView)
+                
+                if dismissImageView == nil {
+                    dismissImageView = UITapGestureRecognizer.init(target: self, action: #selector(self.dimissImageViewAction))
+                    self.imageView .addGestureRecognizer(dismissImageView)
+                }
+            }
+            
+            
+            let url : NSURL = NSURL.init(string: path)!
+            
+            let dispath = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)
+            dispatch_async(dispath, {
+                () -> Void in
+                let data:NSData = NSData.init(contentsOfURL: url)!
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    //刷新主UI
+                    UIView.animateWithDuration(0.5, animations: {
+                        self.maskView.alpha = 1
+                        self.imageView.alpha = 1
+                        self.maskView.hidden = false
+                        self.imageView.hidden = false
+                        self.imageView.image = UIImage.init(data: data, scale: 1.0)
+                    })
+                })
+            })
+
+            print(path)
+            return false
+        }
+        
+        return true
     }
 }
+
+@objc protocol JavaScriptMethodProtocol:JSExport {
+    var value:String {get set}
+    //对应JavaScript中callSwift.postContent方法
+    func postContent(value: String, _number: String)
+    
+    func postContent(value: String, number: String)
+    
+}
+
+
+class JavaScriptMethod : NSObject, JavaScriptMethodProtocol {
+    
+    var value: String {
+        get { return ""}
+        set {          }
+    }
+    
+    func postContent(value: String, _number: String) {
+        
+    }
+    
+    func postContent(value: String, number: String) {
+        
+    }
+}
+
+
+
+
+

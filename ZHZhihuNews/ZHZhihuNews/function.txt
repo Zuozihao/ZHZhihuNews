@@ -1,0 +1,9 @@
+function registerImageClickAction(){
+     var imgs=document.getElementsByTagName('img');
+     var length=imgs.length;
+     for(var i=0;i<length;i++){
+     img=imgs[i];
+     img.onclick=function(){
+     window.location.href='image-preview:'+this.src}
+     }
+     }
