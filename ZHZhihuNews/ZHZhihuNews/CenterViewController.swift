@@ -17,15 +17,20 @@ class CenterViewController: UIViewController,UITableViewDataSource,UITableViewDe
     var timer:NSTimer!
     var dataArray:[NewsListModel]!
     var topStoriesArray:[NewsListModel]!
+    var coutArray:[Int]!//存放每日数量的数组
+    var dateArray:[String]!//存放日期的数组
     //导航栏高度44 状态栏高度20
     
     var pageView:UIPageControl!
+    var date:String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.cyanColor()
         dataArray = []
         topStoriesArray = []
+        coutArray = []
+        dateArray = []
         initView()
         requestData()
         
@@ -125,7 +130,8 @@ class CenterViewController: UIViewController,UITableViewDataSource,UITableViewDe
     
     //MARK:UITableViewDataSource & UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray.count;
+        
+        return coutArray[section]
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -138,10 +144,27 @@ class CenterViewController: UIViewController,UITableViewDataSource,UITableViewDe
             cell.selectionStyle = .Gray
         }
         
+        let section:Int = indexPath.section
+        var allBefore:Int = 0
+        
+        var newsModel:NewsListModel!
+        
+        if section == 0 {
+            newsModel = dataArray[indexPath.row]
+        } else {
+            for i:Int in 0..<section {
+                allBefore += self.coutArray[i]
+            }
+            newsModel = dataArray[indexPath.row + allBefore]
+        }
+        
+//        let newsModel:NewsListModel = dataArray[indexPath.row]
+        
         if self.dataArray.count > 0 {
-            cell.titleLabel.text = dataArray[indexPath.row].titile
+            cell.titleLabel.text = newsModel.titile
+            
             cell.textLabel?.font = UIFont.boldSystemFontOfSize(19)
-            let url:NSURL = NSURL.init(string: dataArray[indexPath.row].imageURL)!
+            let url:NSURL = NSURL.init(string: newsModel.imageURL)!
             
             let dispath = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)
             dispatch_async(dispath, { 
@@ -163,12 +186,26 @@ class CenterViewController: UIViewController,UITableViewDataSource,UITableViewDe
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3;
+        return coutArray.count;
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = NewsDetailViewController()
-        vc.id = self.dataArray[indexPath.row].id
+        
+        var allBefore:Int = 0
+        var newsModel:NewsListModel!
+        
+        if indexPath.section == 0 {
+            newsModel = dataArray[indexPath.row]
+        } else {
+            for i:Int in 0..<indexPath.section {
+                allBefore += self.coutArray[i]
+            }
+            newsModel = dataArray[indexPath.row + allBefore]
+        }
+
+        
+        vc.id = newsModel.id
         vc.navigationController?.navigationBar.hidden = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -178,7 +215,16 @@ class CenterViewController: UIViewController,UITableViewDataSource,UITableViewDe
         if section != 0 {
             let head : UILabel = UILabel.init(frame: CGRectMake(0, 0, self.view.frame.size.width, 25))
             head.backgroundColor = UIColor.init(red: 64/255.0, green: 175/255.0, blue: 255/255.0, alpha: 1)
-            head.text = "07月5日 星期二"
+            var currentDate:String = dateArray[section]
+            let year:String = (currentDate as NSString).substringWithRange(NSMakeRange(0, 4))
+            let month:String = (currentDate as NSString).substringWithRange(NSMakeRange(4, 2))
+            let day:String = (currentDate as NSString).substringWithRange(NSMakeRange(6, 2))
+            currentDate = year+"-"+month+"-"+day
+            let week:Int = getWeekDay(currentDate)
+            print("这是星期",week);
+            
+            let weekDay:String = getChineseWeekDay(week)
+            head.text = month+"月"+day+"日"+"     星期"+weekDay
             head.textColor = UIColor.whiteColor()
             head.textAlignment = .Center
             return head;
@@ -302,8 +348,13 @@ class CenterViewController: UIViewController,UITableViewDataSource,UITableViewDe
             
             if isOk == true {
                 let dic:NSDictionary = response as! NSDictionary
+                
+                self.date = dic.objectForKey("date") as! String
+                self.dateArray.append(self.date)
+                
                 //新闻列表
                 let stories:NSArray = dic.objectForKey("stories") as! NSArray
+                self.coutArray.append(stories.count)
             
                 for i:Int in 0..<stories.count {
                     
@@ -338,9 +389,72 @@ class CenterViewController: UIViewController,UITableViewDataSource,UITableViewDe
                     self.topStoriesArray.append(model)
 
                 }
-                //刷新新闻列表
-                self.tableView.reloadData()
                 
+                manager.getNewsBeforeWithDate(self.date, pre: { (response, isok) in
+                    if isOk == true {
+                        let dic:NSDictionary = response as! NSDictionary
+                        
+                        self.date = dic.objectForKey("date") as! String
+                        self.dateArray.append(self.date)
+                        
+                        //新闻列表
+                        let stories2:NSArray = dic.objectForKey("stories") as! NSArray
+                        
+                        self.coutArray.append(stories2.count)
+                        
+                        for i:Int in 0..<stories2.count {
+                            
+                            let story : NSDictionary = stories2[i] as! NSDictionary
+                            
+                            let imgURLArray:NSArray = story.objectForKey("images") as! NSArray
+                            let imgURL:String = imgURLArray.firstObject as! String
+                            let type:NSNumber = story.objectForKey("type") as! NSNumber
+                            let id:NSNumber = story.objectForKey("id") as! NSNumber
+                            let ga_prefix:String = story.objectForKey("ga_prefix") as! String
+                            let title:String = story.objectForKey("title") as! String
+                            
+                            let model:NewsListModel = NewsListModel.init(imageURL: imgURL, type:type, id: id, ga_prefix: ga_prefix, titile: title)
+                            
+                            self.dataArray.append(model)
+                        }
+                        
+                        manager.getNewsBeforeWithDate(self.date, pre: { (response, isok) in
+                            if isok == true {
+                                let dic:NSDictionary = response as! NSDictionary
+                                
+                                self.date = dic.objectForKey("date") as! String
+                                self.dateArray.append(self.date)
+                                
+                                //新闻列表
+                                let stories3:NSArray = dic.objectForKey("stories") as! NSArray
+                                
+                                self.coutArray.append(stories3.count)
+                                
+                                for i:Int in 0..<stories3.count {
+                                    
+                                    let story : NSDictionary = stories3[i] as! NSDictionary
+                                    
+                                    let imgURLArray:NSArray = story.objectForKey("images") as! NSArray
+                                    let imgURL:String = imgURLArray.firstObject as! String
+                                    let type:NSNumber = story.objectForKey("type") as! NSNumber
+                                    let id:NSNumber = story.objectForKey("id") as! NSNumber
+                                    let ga_prefix:String = story.objectForKey("ga_prefix") as! String
+                                    let title:String = story.objectForKey("title") as! String
+                                    
+                                    let model:NewsListModel = NewsListModel.init(imageURL: imgURL, type:type, id: id, ga_prefix: ga_prefix, titile: title)
+                                    
+                                    self.dataArray.append(model)
+                                }
+                                
+                                //刷新新闻列表
+                                self.tableView.reloadData()
+
+                            }
+                        })
+                        
+
+                    }
+                })
                 //刷新顶部新闻列表
                 let firstImgView:UIImageView = self.myScrollView.viewWithTag(100) as!UIImageView
                 let url:NSURL = NSURL.init(string: self.topStoriesArray.last!.imageURL)!
@@ -385,16 +499,40 @@ class CenterViewController: UIViewController,UITableViewDataSource,UITableViewDe
                            imgView.image = UIImage.init(data: data, scale: 1.0)
                         })
                     })
-
-                    
                 }
-                
-                
-
             }
         })
         
     }
+    
+    func getChineseWeekDay(weekday:Int) -> String {
+        if weekday==1 {
+            return "一"
+        } else if weekday==2 {
+            return "二"
+        } else if weekday==3 {
+            return "三"
+        } else if weekday==4 {
+            return "四"
+        } else if weekday==5 {
+            return "五"
+        } else if weekday==6 {
+            return "六"
+        }
+        return "日"
+    }
+    
+    func getWeekDay(dateTime:String)->Int{
+        let dateFmt = NSDateFormatter()
+        dateFmt.dateFormat = "yyyy-MM-dd"
+        let date = dateFmt.dateFromString(dateTime)
+        date?.description
+        let interval = Int(date!.timeIntervalSince1970) + NSTimeZone.localTimeZone().secondsFromGMT
+        let days = Int(interval/86400) // 24*60*60
+        let weekday = ((days + 4)%7+7)%7
+        return weekday == 0 ? 7 : weekday
+    }
+    
     //MARK:重载方法
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

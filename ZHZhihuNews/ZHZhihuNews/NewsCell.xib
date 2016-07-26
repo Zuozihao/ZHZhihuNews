@@ -18,14 +18,14 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一个好好看的美食节目,带你看怎么做好法式马卡龙,一起来看看阿姆的风采吧,天天读书不休息" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMo-Ti-oL7">
                         <rect key="frame" x="16" y="8" width="266" height="54.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recovery.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="q5n-qc-D0X">
-                        <rect key="frame" x="287" y="8" width="80" height="64"/>
+                        <rect key="frame" x="287" y="8" width="80" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="Ln8-KU-hLi"/>
-                            <constraint firstAttribute="height" constant="64" id="tOH-Xp-Oap"/>
+                            <constraint firstAttribute="height" constant="60" id="tOH-Xp-Oap"/>
                         </constraints>
                     </imageView>
                 </subviews>

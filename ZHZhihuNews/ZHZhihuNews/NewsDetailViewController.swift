@@ -80,6 +80,33 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
         self.webScrollView.delegate = self
         self.webScrollView.tag = 2
         scrollView.addSubview(webView)
+        
+        let imageArray:Array = ["News_Navigation_Arrow","News_Navigation_Next","News_Navigation_Vote","News_Navigation_Share","News_Navigation_Comment"]
+        let selectedImageArray:Array = ["News_Navigation_Arrow_Highlight","News_Navigation_Next_Highlight","News_Navigation_Voted","News_Navigation_Share_Highlight","News_Navigation_Comment_Highlight"]
+        
+        let first:UIBarButtonItem = createToolBarbutton(CGRectMake(0, 0, 60, 40), imageName: imageArray[0], selectedImageName: selectedImageArray[0])
+        let firstButton:UIButton = first.customView as! UIButton
+        firstButton .addTarget(self, action: #selector(self.back), forControlEvents: .TouchUpInside)
+        let second:UIBarButtonItem = createToolBarbutton(CGRectMake(0, 0, 60, 40), imageName: imageArray[1], selectedImageName: selectedImageArray[1])
+        let third:UIBarButtonItem = createToolBarbutton(CGRectMake(0, 0, 60, 40), imageName: imageArray[2], selectedImageName: selectedImageArray[2])
+        let fourth:UIBarButtonItem = createToolBarbutton(CGRectMake(0, 0, 60, 40), imageName: imageArray[3], selectedImageName: selectedImageArray[3])
+        let fifth:UIBarButtonItem = createToolBarbutton(CGRectMake(0, 0, 60, 40), imageName: imageArray[4], selectedImageName: selectedImageArray[4])
+        
+        self.toolBar.items = [first,second,third,fourth,fifth]
+        
+    }
+    
+    func createToolBarbutton(frame:CGRect, imageName:String, selectedImageName:String) -> UIBarButtonItem {
+        let button:UIButton = UIButton.init(type: .Custom)
+        button.frame = frame
+        button.setImage(UIImage.init(named: imageName), forState: .Normal)
+        button.setImage(UIImage.init(named: selectedImageName), forState: .Selected)
+        let toolBarbuttonItem:UIBarButtonItem = UIBarButtonItem.init(customView: button)
+        return toolBarbuttonItem
+    }
+    
+    func back() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func requestData() {
@@ -155,7 +182,7 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
         } else if scrollView.tag == 2 {
             print(self.webScrollView.contentSize.height)
             let y:CGFloat = self.webScrollView.contentOffset.y
-            print("网页便宜量\(y)")
+            print("网页偏移量\(y)")
             if scrollView.contentOffset.y <= 0 {
                 self.scrollView.scrollEnabled = true
                 self.webScrollView.scrollEnabled = false
@@ -167,6 +194,12 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.hidden = true
+        self.evo_drawerController?.openDrawerGestureModeMask = .PanningNavigationBar
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+//        self.evo_drawerController?.leftDrawerViewController = nil
     }
     
     override func didReceiveMemoryWarning() {
@@ -182,18 +215,6 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
             self.imageView.hidden = true
         }
     }
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
